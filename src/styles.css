@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your custom styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #42bfcf; }
+::-webkit-scrollbar-thumb { background: #d30808; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
