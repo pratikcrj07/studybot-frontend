@@ -54,14 +54,18 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onSubmit() {
+    this.errorMessage = '';
+    this.successMessage = '';
     this.isLoading = true;
+
     this.authService.verifyOtp({ email: this.email, otp: this.otp }).subscribe({
       next: () => {
         this.successMessage = 'Verification successful! Redirecting to login...';
+        this.isLoading = false;
         setTimeout(() => this.router.navigate(['/login']), 2000);
       },
       error: (err) => {
-        this.errorMessage = err.error || 'Invalid OTP';
+        this.errorMessage = err.error?.message || 'Invalid OTP';
         this.isLoading = false;
       }
     });

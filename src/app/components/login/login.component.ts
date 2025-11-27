@@ -61,8 +61,6 @@ export class LoginComponent {
 
   onSubmit() {
     this.submitted = true;
-
-    // Inline field validation
     if (!this.email || !this.password) {
       this.errorMessage = 'Please fill in all fields';
       return;
@@ -71,14 +69,25 @@ export class LoginComponent {
     this.errorMessage = '';
     this.isLoading = true;
 
-    // AuthService login logic
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
-        this.router.navigate(['/chat']);
-        this.isLoading = false;
+        // Fetch profile after login
+        this.authService.fetchProfile().subscribe({
+          next: (user) => {
+            if (user) {
+              localStorage.setItem('userProfile', JSON.stringify(user));
+              this.router.navigate(['/chat']);
+            }
+            this.isLoading = false;
+          },
+          error: (err) => {
+            this.errorMessage = 'Failed to fetch profile';
+            this.isLoading = false;
+          }
+        });
       },
       error: (err) => {
-        this.errorMessage = err.error || 'Login failed. Please check your credentials.';
+        this.errorMessage = err.error?.message || 'Login failed. Please check your credentials.';
         this.isLoading = false;
       }
     });
