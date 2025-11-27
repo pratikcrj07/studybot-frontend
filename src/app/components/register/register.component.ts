@@ -46,7 +46,8 @@ import { AuthService } from '../../services/auth.service';
           </div>
 
           <button type="submit"
-                  class="w-full bg-primary text-white py-2 rounded-lg bg-indigo-700 transition">
+                  class="w-full bg-primary text-white py-2 rounded-lg bg-indigo-700 transition"
+                  [disabled]="isLoading">
             {{ isLoading ? 'Registering...' : 'Register' }}
           </button>
         </form>
@@ -82,7 +83,8 @@ export class RegisterComponent {
 
     this.authService.register({ username: this.name, email: this.email, password: this.password }).subscribe({
       next: () => {
-        this.router.navigate(['/login']);
+        // Navigate to OTP verification page after registration
+        this.router.navigate(['/verify-otp'], { queryParams: { email: this.email } });
         this.isLoading = false;
       },
       error: (err) => {

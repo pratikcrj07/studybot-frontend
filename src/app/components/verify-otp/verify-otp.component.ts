@@ -13,11 +13,11 @@ import { AuthService } from '../../services/auth.service';
       <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center">
         <h2 class="text-2xl font-bold text-gray-800 mb-2">Verify Email</h2>
         <p class="text-gray-600 mb-6">Enter the OTP sent to <strong>{{email}}</strong></p>
-        
+
         <form (ngSubmit)="onSubmit()" class="space-y-4">
           <input type="text" [(ngModel)]="otp" name="otp" placeholder="Enter 6-digit OTP" required maxlength="6"
-            class="w-full text-center text-2xl tracking-widest px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:outline-none">
-          
+                 class="w-full text-center text-2xl tracking-widest px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:outline-none">
+
           <div *ngIf="errorMessage" class="text-red-500 text-sm bg-red-50 p-2 rounded">
             {{ errorMessage }}
           </div>
@@ -27,7 +27,7 @@ import { AuthService } from '../../services/auth.service';
           </div>
 
           <button type="submit" [disabled]="otp.length < 6 || isLoading"
-            class="w-full bg-primary text-white py-2 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50">
+                  class="w-full bg-primary text-white py-2 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50">
             {{ isLoading ? 'Verifying...' : 'Verify OTP' }}
           </button>
         </form>
@@ -49,14 +49,14 @@ export class VerifyOtpComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.email = params['email'];
-      if(!this.email) this.router.navigate(['/register']);
+      if (!this.email) this.router.navigate(['/register']);
     });
   }
 
   onSubmit() {
     this.isLoading = true;
     this.authService.verifyOtp({ email: this.email, otp: this.otp }).subscribe({
-      next: (res) => {
+      next: () => {
         this.successMessage = 'Verification successful! Redirecting to login...';
         setTimeout(() => this.router.navigate(['/login']), 2000);
       },
