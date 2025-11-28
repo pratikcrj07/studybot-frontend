@@ -9,9 +9,27 @@ html, body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9fafb;
 }
+/* GLOBAL SCROLLBAR FIX */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff; /* white background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7c7c7; /* light grey */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; /* slightly darker on hover */
+}
+
 
 /* Scrollbar customization */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #42bfcf; }
-::-webkit-scrollbar-thumb { background: #d30808; border-radius: 4px; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #dcdcdc; }
+::-webkit-scrollbar-thumb { background: #cababa; border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
