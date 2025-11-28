@@ -15,7 +15,9 @@ export class ChatService {
   }
 
   sendMessage(message: string): Observable<ChatMessage> {
-    const body: ChatRequest = { message };
-    return this.http.post<ChatMessage>(`${this.apiUrl}/api/chat/message`, body);
+    const body: ChatRequest = {message};
+    return this.http.post<ChatMessage>(`${this.apiUrl}/api/chat/message`, body, {
+      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+    });
   }
 }
